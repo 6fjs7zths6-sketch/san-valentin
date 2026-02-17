@@ -3,26 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day Page</title>
+    <title>Happy Valentine's Day</title>
     <style>
         body {
-            background-color: #ffccdc;
-            color: #333;
             font-family: Arial, sans-serif;
+            background-color: #f9e1e1;
             text-align: center;
-            padding: 20px;
+            overflow: hidden;
         }
-        h1 {
-            color: #d5006d;
+        .envelope {
+            width: 200px;
+            height: 130px;
+            background: white;
+            border: 5px solid #e14855;
+            position: relative;
+            margin: auto;
+            animation: openEnvelope 5s ease-in-out infinite;
         }
-        p {
-            font-size: 1.2em;
+        @keyframes openEnvelope {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .typewriter {
+            overflow: hidden; 
+            border-right: .15em solid #e14855;
+            white-space: nowrap; 
+            margin: 0 auto; 
+            letter-spacing: .15em; 
+            animation: typing 4s steps(30, end), blink-caret .75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 22em; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #e14855; }
+        }
+        .heart {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 0, 0, 0.5);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation: float 5s ease-in infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+            100% { transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <h1>Happy Valentine's Day!</h1>
-    <p>Celebrate love and friendship on this special day.</p>
-    <p>Sending you lots of love!</p>
+    <div class="envelope"></div>
+    <h1 class="typewriter">Happy Valentine's Day!</h1>
+    <div class="hearts">
+        <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="heart" style="left: 30%; animation-delay: 1s;"></div>
+        <div class="heart" style="left: 50%; animation-delay: 2s;"></div>
+        <div class="heart" style="left: 70%; animation-delay: 3s;"></div>
+        <div class="heart" style="left: 90%; animation-delay: 4s;"></div>
+    </div>
+    <audio controls>
+        <source src="valentine-song.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
 </body>
 </html>
