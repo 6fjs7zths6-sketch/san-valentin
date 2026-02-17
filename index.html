@@ -1,74 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine's Day</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9e1e1;
-            text-align: center;
-            overflow: hidden;
-        }
-        .envelope {
-            width: 200px;
-            height: 130px;
-            background: white;
-            border: 5px solid #e14855;
-            position: relative;
-            margin: auto;
-            animation: openEnvelope 5s ease-in-out infinite;
-        }
-        @keyframes openEnvelope {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        .typewriter {
-            overflow: hidden; 
-            border-right: .15em solid #e14855;
-            white-space: nowrap; 
-            margin: 0 auto; 
-            letter-spacing: .15em; 
-            animation: typing 4s steps(30, end), blink-caret .75s step-end infinite;
-        }
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 22em; }
-        }
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: #e14855; }
-        }
-        .heart {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background-color: rgba(255, 0, 0, 0.5);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            animation: float 5s ease-in infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-50px); }
-            100% { transform: translateY(0); }
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Para Luana ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<style>
+/* RESET */
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:linear-gradient(135deg,#1a001a,#330033);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:'Dancing Script', cursive;
+    overflow:hidden;
+}
+
+/* SOBRE */
+.envelope{
+    position:relative;
+    width:600px;
+    height:400px;
+    background:#ffccd5;
+    border-radius:20px;
+    cursor:pointer;
+    box-shadow:0 20px 50px rgba(0,0,0,0.5);
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+     align-items:flex-end; /* para alinear carta al fondo */
+}
+
+/* TAPA */
+.flap{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#ff8fab;
+    clip-path:polygon(0 0, 100% 0, 50% 60%);
+    transform-origin:top;
+    transition:1s;
+    z-index:3;
+    top:0;
+    left:0;
+}
+
+.envelope.open .flap{
+    transform:rotateX(180deg);
+}
+
+/* CARTA */
+.card{
+    width:92%;
+    height:92%;
+    background:#fff0f5;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    overflow-y:auto;
+    position:absolute;
+    bottom:-110%;
+    left:4%;
+    transition:1s;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start; /* texto al inicio de la carta */
+    z-index:1;
+}
+
+.envelope.open .card{
+    bottom:4%; /* carta sube dentro del sobre */
+}
+
+/* Texto */
+h1{
+    color:#d63384;
+    font-size:32px;
+    margin-bottom:15px;
+}
+
+#text{
+    font-size:24px;
+    line-height:1.6;
+    color:#6f1d1b;
+    white-space:pre-line;
+    flex-grow:1; /* para ocupar todo el espacio de la carta */
+}
+
+.buttons{
+    margin-top:15px;
+    position:relative;
+}
+
+/* Botones */
+button{
+    padding:10px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    font-family:'Dancing Script', cursive;
+    transition:0.3s;
+}
+
+#yes{
+    background:#ff4d6d;
+    color:white;
+}
+
+#no{
+    background:white;
+    color:#ff4d6d;
+    position:absolute;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+/* Corazones flotando */
+.heart{
+    position:absolute;
+    color:#ff4d6d;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);opacity:1;}
+    to{transform:translateY(-10vh);opacity:0;}
+}
+</style>
 </head>
+
 <body>
-    <div class="envelope"></div>
-    <h1 class="typewriter">Happy Valentine's Day!</h1>
-    <div class="hearts">
-        <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
-        <div class="heart" style="left: 30%; animation-delay: 1s;"></div>
-        <div class="heart" style="left: 50%; animation-delay: 2s;"></div>
-        <div class="heart" style="left: 70%; animation-delay: 3s;"></div>
-        <div class="heart" style="left: 90%; animation-delay: 4s;"></div>
+
+<audio id="music" loop>
+    <source src="gone.mp3" type="audio/mpeg">
+</audio>
+
+<div class="envelope" id="envelope">
+    <div class="flap"></div>
+
+    <div class="card">
+        <h1>Luana 💌</h1>
+        <div id="text"></div>
+
+        <div class="buttons">
+            <button id="yes">Sí ❤️</button>
+            <button id="no">No 😢</button>
+        </div>
     </div>
-    <audio controls>
-        <source src="valentine-song.mp3" type="audio/mpeg">
-        Your browser does not support the audio tag.
-    </audio>
+</div>
+
+<script>
+// elementos
+const envelope = document.getElementById("envelope");
+const music = document.getElementById("music");
+
+// mensaje personalizado
+const message = 
+`Sé que estás pasando por mucho estrés por el ingreso.
+Esto es un recordatorio de lo maravillosa que sos y de que podés con todo.
+
+Con eso dicho…
+
+¿Querés ser mi San Valentín? 💖`;
+
+let i = 0;
+
+// máquina de escribir
+function typeWriter(){
+    if(i < message.length){
+        document.getElementById("text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50);
+    }
+}
+
+// abrir sobre
+envelope.addEventListener("click", function(){
+    envelope.classList.add("open");
+    music.play();
+    setTimeout(typeWriter, 1000);
+}, { once:true });
+
+// botón NO se mueve
+const noBtn = document.getElementById("no");
+noBtn.addEventListener("mouseover", function(){
+    const card = document.querySelector(".card");
+    const x = Math.random() * (card.clientWidth - 80);
+     const y = Math.random() * (card.clientHeight - 40);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+// botón SÍ muestra mensaje final
+document.getElementById("yes").addEventListener("click", function(){
+    document.querySelector(".card").innerHTML =
+    "<h1 style='margin-top:80px;color:#d63384;'>No importa el día...<br>conmigo todos los días serán San Valentín ❤️</h1>";
+});
+
+// corazones flotando
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = Math.random()*20 + 20 + "px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,500);
+</script>
+
 </body>
 </html>
